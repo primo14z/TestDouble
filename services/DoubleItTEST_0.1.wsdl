@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="DoubleIt"
+		xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+		xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		xmlns:tns="http://www.talend.org/service/"
+		targetNamespace="http://www.talend.org/service/">
+
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://www.talend.org/service/">
+			<xsd:element name="DoubleItOperationRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="in" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DoubleItOperationResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="DoubleItOperationRequest">
+		<wsdl:part name="parameters" element="tns:DoubleItOperationRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="DoubleItOperationResponse">
+		<wsdl:part name="parameters" element="tns:DoubleItOperationResponse"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:portType name="DoubleItPortType">
+		<wsdl:operation name="DoubleItOperation">
+			<wsdl:input message="tns:DoubleItOperationRequest"></wsdl:input>
+			<wsdl:output message="tns:DoubleItOperationResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="DoubleItBinding" type="tns:DoubleItPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="DoubleItOperation">
+			<soap:operation soapAction="http://www.talend.org/service/DoubleItOperation" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="">
+		<wsdl:port name="DoubleItPort" binding="tns:DoubleItBinding">
+			<soap:address location="http://localhost:8090/services/DoubleIt" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
